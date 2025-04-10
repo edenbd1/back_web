@@ -1,0 +1,81 @@
+# Test 1: Inscription d'un nouvel utilisateur
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "contactuser",
+    "password": "password123",
+    "email": "contact@example.com"
+}
+
+###
+
+# Test 2: Connexion de l'utilisateur (récupérer le token)
+POST http://localhost:3000/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "contact@example.com",
+    "password": "password123"
+}
+
+###
+
+# Test 3: Créer un contact (avec le token)
+# Remplacez YOUR_TOKEN par le token reçu lors de la connexion
+POST http://localhost:3000/api/contacts HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN
+
+{
+    "name": "John",
+    "surname": "Doe",
+    "nickname": "Johnny",
+    "phone": "+33612345678",
+    "email": "john.doe@example.com",
+    "company": "Tech Corp",
+    "education": "MIT",
+    "dateOfBirth": "1990-01-01",
+    "address": "123 Main St, Paris"
+}
+
+###
+
+# Test 4: Récupérer tous les contacts de l'utilisateur
+# Remplacez YOUR_TOKEN par le token reçu lors de la connexion
+GET http://localhost:3000/api/contacts HTTP/1.1
+Authorization: Bearer YOUR_TOKEN
+
+###
+
+# Test 5: Mettre à jour un contact
+# Remplacez YOUR_TOKEN par le token reçu lors de la connexion
+# Remplacez CONTACT_ID par l'ID du contact créé
+PUT http://localhost:3000/api/contacts/CONTACT_ID HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN
+
+{
+    "name": "John",
+    "surname": "Doe",
+    "nickname": "JD",
+    "phone": "+33612345678",
+    "email": "john.updated@example.com",
+    "company": "New Corp",
+    "education": "Harvard",
+    "dateOfBirth": "1990-01-01",
+    "address": "456 New St, Lyon"
+}
+
+###
+
+# Test 6: Supprimer un contact
+# Remplacez YOUR_TOKEN par le token reçu lors de la connexion
+# Remplacez CONTACT_ID par l'ID du contact à supprimer
+DELETE http://localhost:3000/api/contacts/CONTACT_ID HTTP/1.1
+Authorization: Bearer YOUR_TOKEN
+
+###
+
+# Test 7: Tester une route protégée sans token (devrait échouer)
+GET http://localhost:3000/api/contacts HTTP/1.1 
