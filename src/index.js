@@ -8,7 +8,7 @@ import addRouteHandlers from "./handlers/index.js";
 const app = fastify({ logger: true });
 
 await app.register(cors, {
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://zlend.fi'],
+  origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://contactmanagerfin.netlify.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
